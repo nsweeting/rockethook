@@ -1,8 +1,24 @@
 version: 1.0
 shards:
+  kemal:
+    github: sdogruyol/kemal
+    commit: 749c101d2e926a8c19aebc7541fe9db94382ba03
+
+  kilt:
+    github: jeromegn/kilt
+    version: 0.3.3
+
+  multipart:
+    github: RX14/multipart.cr
+    version: 0.1.0
+
   pool:
     github: ysbaddaden/pool
     commit: c4ecfad1b87fbd8c6484d1fd536ccfd14c40cc94
+
+  radix:
+    github: luislavena/radix
+    version: 0.3.1
 
   redis:
     github: stefanwille/crystal-redis

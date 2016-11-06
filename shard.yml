@@ -13,3 +13,6 @@ dependencies:
   redis:
     github: stefanwille/crystal-redis
     branch: master
+  kemal:
+    github: sdogruyol/kemal
+    branch: master

@@ -13,7 +13,13 @@ module Rockethook
     end
 
     def push_one(hook : Webhook)
-      @cxt.pool.redis { |conn| conn.lpush(queue, hook.to_json) }
+      push_one(hook.to_json)
+    end
+
+    def push_bulk(hooks : Array(Webhook))
+      @cxt.pool.redis_pipe do |pipe|
+        hooks.each { |hook| pipe.lpush(queue, hook.to_json) }
+      end
     end
   end
 end

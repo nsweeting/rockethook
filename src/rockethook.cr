@@ -12,26 +12,32 @@ require "logger"
 require "./rockethook/version"
 require "./rockethook/config"
 require "./rockethook/redis"
-require "./rockethook/cli"
-require "./rockethook/client"
-require "./rockethook/delayer"
-require "./rockethook/fetcher"
-require "./rockethook/poller"
-require "./rockethook/deliverer"
-require "./rockethook/scheduler"
-require "./rockethook/manager"
 require "./rockethook/webhook"
 require "./rockethook/logger"
+require "./rockethook/client"
+require "./rockethook/context"
+require "./rockethook/server/cli"
+require "./rockethook/server/delayer"
+require "./rockethook/server/fetcher"
+require "./rockethook/server/poller"
+require "./rockethook/server/deliverer"
+require "./rockethook/server/scheduler"
+require "./rockethook/server/statistics"
+require "./rockethook/server/tracker"
+require "./rockethook/server/manager"
+
 
 module Rockethook
-  #config = Config.from_yaml("nothing: here")
-  #context = Context.new(config)
-  #client = Client.new(context)
-  #1..10000.times do
-    #webhook = Webhook.from_json("{}")
-    #client.push_one(webhook)
-  #end
+  config = Config.from_yaml("nothing: here")
+  context = Context.new(config)
+  client = Client.new(context)
+  webhooks = [] of Webhook
+  1..30000.times do
+    webhooks << Webhook.from_json("{}")
+  end
 
-  cli = CLI.new
+  client.push_bulk(webhooks)
+
+  cli = Rockethook::Server::CLI.new
   cli.start
 end

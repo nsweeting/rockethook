@@ -39,6 +39,12 @@ module Rockethook
       pool.connection { |conn| yield conn }
     end
 
+    def redis_pipe
+      pool.connection do |conn|
+        conn.pipelined { |pipe| yield pipe }
+      end
+    end
+
     private def build_pool
       ConnectionPool(Redis).new(capacity: size, timeout: timeout) do
         config.new_client
