@@ -1,4 +1,4 @@
-# Rockethook
+![alt tag](https://github.com/nsweeting/rockethook/blob/master/rockethook-logo.png?raw=true)
 
 TODO: Write a description here
 
@@ -9,7 +9,7 @@ TODO: Write installation instructions here
 
 
 ## Usage
-
+https://github.com/nsweeting/rockethook/blob/master/rockethook-logo.png?raw=true
 
 
 TODO: Write usage instructions here
