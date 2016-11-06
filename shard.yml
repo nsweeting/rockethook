@@ -1,0 +1,15 @@
+name: rockethook
+version: 0.1.0
+
+authors:
+  - Nicholas Sweeting <nsweeting@gmail.com>
+
+license: MIT
+
+dependencies:
+  pool:
+    github: ysbaddaden/pool
+    branch: master
+  redis:
+    github: stefanwille/crystal-redis
+    branch: master
