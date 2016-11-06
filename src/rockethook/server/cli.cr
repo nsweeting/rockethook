@@ -3,26 +3,19 @@ module Rockethook
     class CLI
       getter context : Rockethook::Context
       getter manager : Rockethook::Server::Manager
-      getter logger : ::Logger
 
       def initialize(argv = ARGV)
         @config = Rockethook::Config::BASE
         parse_options(argv)
-        @logger = Logger.build
         config = Rockethook::Config.from_yaml(@config)
         @context = Rockethook::Context.new(config)
         @manager = Rockethook::Server::Manager.new(context)
       end
 
       def start
-        logger.info " in Crystal #{Crystal::VERSION}"
-        logger.info "Starting processing with #{context.config.concurrency} workers"
-
-        
+        boot_message
         manager.start
-
         wait
-
         exit(0)
       end
 
@@ -35,6 +28,11 @@ module Rockethook
           end
           parser.on("-h", "--help", "Show this help") { puts parser }
         end
+      end
+
+      def boot_message
+        context.logger.info("Booting Rockethook #{Rockethook::VERSION}")
+        context.logger.info("Starting with #{context.config.concurrency} deliverers")
       end
 
       def wait
@@ -51,34 +49,6 @@ module Rockethook
           manager.stop!
         end
         channel.receive
-      end
-
-      def banner
-        %Q{
-    ############################################
-    ################''###  #####################
-    #############'    ###  #####################
-    ###########'      ###  #####################
-    #########'        ###  #####################
-    ########'         ###  #####################
-    #######'          ###  ##'##################
-    ######'           ###  ##   '###############
-    #####'            ###  ##     '#############
-    ####'             ###  ##       '###########
-    ###'              ###  ##         '#########
-    ###'              ###  ##           '#######
-    #####################  #####################
-    ###                                       ##
-    ###.                                      ##
-    #####.                                  .###
-    ############################################
-    ############################################
-  }
-      end
-
-      def print_banner
-          puts banner
-
       end
     end
   end

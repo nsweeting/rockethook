@@ -18,7 +18,7 @@ module Rockethook
       end
 
       def post(hook : Rockethook::Webhook)
-        response = HTTP::Client.post(hook.uri, hook.headers, body: hook.payload)
+        response = HTTP::Client.post(hook.uri, hook.headers, body: hook.payload.to_json)
         response.success? ? success! : failure!(hook)
       rescue
         failure!(hook)

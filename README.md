@@ -1,16 +1,12 @@
 ![alt tag](https://github.com/nsweeting/rockethook/blob/master/rockethook-logo.png?raw=true)
 
-TODO: Write a description here
+Rockethook is a microservice dedicated to delivering webhooks. Backed by the Crystal Language and Redis, Rockethook can achieve unmatched speeds with little effort.
 
 ## Installation
 
-
-TODO: Write installation instructions here
-
+TODO: Write usage instructions here
 
 ## Usage
-https://github.com/nsweeting/rockethook/blob/master/rockethook-logo.png?raw=true
-
 
 TODO: Write usage instructions here
 
@@ -20,7 +16,7 @@ TODO: Write development instructions here
 
 ## Contributing
 
-1. Fork it ( https://github.com/[your-github-name]/headsail/fork )
+1. Fork it ( https://github.com/[nsweeting]/rockethook/fork )
 2. Create your feature branch (git checkout -b my-new-feature)
 3. Commit your changes (git commit -am 'Add some feature')
 4. Push to the branch (git push origin my-new-feature)
@@ -28,4 +24,4 @@ TODO: Write development instructions here
 
 ## Contributors
 
-- [[your-github-name]](https://github.com/[your-github-name]) Nicholas Sweeting - creator, maintainer
+- [[nsweeting]](https://github.com/nsweeting) Nicholas Sweeting - creator, maintainer

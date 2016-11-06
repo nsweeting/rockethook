@@ -12,7 +12,7 @@ module Rockethook
       def start
         spawn do
           until stop
-            puts "success: #{@manager.stats.success}, failure: #{@manager.stats.failure}"
+            @manager.stats.update!
             sleep interval
           end
         end

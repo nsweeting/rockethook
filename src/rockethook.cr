@@ -13,7 +13,6 @@ require "./rockethook/version"
 require "./rockethook/config"
 require "./rockethook/redis"
 require "./rockethook/webhook"
-require "./rockethook/logger"
 require "./rockethook/client"
 require "./rockethook/context"
 require "./rockethook/server/cli"
@@ -32,8 +31,8 @@ module Rockethook
   context = Context.new(config)
   client = Client.new(context)
   webhooks = [] of Webhook
-  1..30000.times do
-    webhooks << Webhook.from_json("{}")
+  1..30000.times do |x|
+    webhooks << Webhook.from_json(%Q({"uri": "http://0.0.0.0:5000/test", "payload": {"id": #{x}}}))
   end
 
   client.push_bulk(webhooks)

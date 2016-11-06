@@ -11,6 +11,10 @@ module Rockethook
         @start     = Time.now.epoch
       end
 
+      def update!
+        @cxt.logger.info("Success: #{success}, Failure: #{failure}")
+      end
+
       def success!
         @success += 1
       end
