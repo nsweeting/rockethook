@@ -1,3 +1,7 @@
+require "uri"
+require "redis"
+require "pool/connection"
+
 module Rockethook
   class RedisConfig
     property! host : String

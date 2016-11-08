@@ -1,3 +1,5 @@
+require "yaml"
+
 module Rockethook
   class Config
     BASE = "nothing: here"

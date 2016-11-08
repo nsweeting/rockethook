@@ -4,7 +4,27 @@ Rockethook is a microservice dedicated to delivering webhooks. Backed by the Cry
 
 ## Installation
 
-TODO: Write usage instructions here
+Prerequisites:
+
+* The latest version of crystal (> 0.19.0).
+
+Clone the repo:
+```
+git clone https://github.com/nsweeting/rockethook.git
+```
+Switch to repo-directory:
+```
+cd rockethook
+```
+Build:
+```
+make
+```
+And create symlink of `./bin/rockethook` into the directory that is listed in your `$PATH`, e.g.:
+```
+sudo ln -s $(realpath ./bin/rockethook) /usr/bin/rockethook
+```
+_(it's necessary only for the first time)_
 
 ## Usage
 

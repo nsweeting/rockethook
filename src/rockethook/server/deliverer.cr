@@ -1,3 +1,5 @@
+require "http"
+
 module Rockethook
   module Server
     class Deliverer

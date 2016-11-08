@@ -1,3 +1,9 @@
+require "option_parser"
+require "../config"
+require "../context"
+require "../version"
+require "./manager"
+
 module Rockethook
   module Server
     class CLI
@@ -31,7 +37,7 @@ module Rockethook
       end
 
       def boot_message
-        context.logger.info("Booting Rockethook #{Rockethook::VERSION}")
+        context.logger.info("Booting Rockethook v#{Rockethook::VERSION}")
         context.logger.info("Starting with #{context.config.concurrency} deliverers")
       end
 

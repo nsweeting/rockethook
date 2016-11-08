@@ -1,3 +1,7 @@
+require "json"
+require "secure_random"
+require "openssl/hmac"
+
 module Rockethook
   class Webhook
     USER_AGENT = "Rockethook/#{VERSION}"
