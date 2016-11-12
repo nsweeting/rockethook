@@ -1,6 +1,6 @@
 require "kemal"
 
-logging false
+Kemal.config.port = 5000
 post "/" do
   "Hello World!"
 end

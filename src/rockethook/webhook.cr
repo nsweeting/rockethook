@@ -3,10 +3,7 @@ require "secure_random"
 require "openssl/hmac"
 
 module Rockethook
-  class Webhook
-    USER_AGENT = "Rockethook/#{VERSION}"
-    CONTENT_TYPE = "application/json"
-
+  struct Webhook
     JSON.mapping(
       uuid:       { type: String, default: SecureRandom.uuid },
       context:    { type: String, default: "" },
@@ -22,15 +19,7 @@ module Rockethook
       self.attempts += 1
     end
 
-    def headers
-      HTTP::Headers{ "User-Agent" => USER_AGENT,
-                     "Content-Type" => CONTENT_TYPE,
-                     "X-Webhook-Context" => context,
-                     "X-Webhook-Signature" => generate_hmac,
-                     "X-Webhook-Event" => event }
-    end
-
-    private def generate_hmac
+    def generate_hmac
       Base64.encode(OpenSSL::HMAC.digest(:sha256, token, payload.to_s)).strip
     end
   end

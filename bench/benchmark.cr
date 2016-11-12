@@ -19,7 +19,7 @@ a = Time.now
 iter.times do
   webhooks = [] of Rockethook::Webhook
   count.times do |x|
-    webhooks << Rockethook::Webhook.from_json(%Q({"uri": "http://0.0.0.0:3000/", "payload": {"id": #{x}}}))
+    webhooks << Rockethook::Webhook.from_json(%Q({"uri": "http://localhost:5000/", "payload": {"id": #{x}}}))
   end
   client.push_bulk(webhooks)
 end

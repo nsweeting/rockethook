@@ -15,8 +15,6 @@ module Rockethook
           conn.brpop(queue, TIMEOUT).as(Array(Redis::RedisValue))
         end
         Webhook.from_json(array.last.to_s) if array.size == 2
-      rescue JSON::ParseException
-        return nil
       end
     end
   end
