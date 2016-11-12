@@ -49,11 +49,14 @@ module Rockethook
     end
 
     class HTTPPool
-      property! uri : URI
-      property pool : ConnectionPool(HTTP::Client)
       getter created_at : Int64
+      property! config : URI
+      property! size : Int32
+      property! timeout : Float64
+      property pool : ConnectionPool(HTTP::Client)
 
-      def initialize(@uri : URI)
+      def initialize(config : URI, @size = 5, @timeout = 5.0)
+        @config = config
         @pool = build_pool
         @created_at = Time.now.epoch
       end
@@ -63,8 +66,8 @@ module Rockethook
       end
 
       private def build_pool
-        ConnectionPool(HTTP::Client).new(capacity: 5, timeout: 5.0) do
-          HTTP::Client.new(uri)
+        ConnectionPool(HTTP::Client).new(capacity: size, timeout: timeout) do
+          HTTP::Client.new(config)
         end
       end
     end

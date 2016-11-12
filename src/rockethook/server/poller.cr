@@ -17,7 +17,7 @@ module Rockethook
             results = conn.zrangebyscore(queue, "-inf", now, limit: [0, 1]).as(Array)
             break if results.empty?
             hookstr = results[0].as(String)
-            @client.push_one(hookstr) if conn.zrem(queue, hookstr)
+            @client.push(hookstr) if conn.zrem(queue, hookstr)
           end
         end
       end

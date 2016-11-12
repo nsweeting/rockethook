@@ -8,15 +8,15 @@ module Rockethook
       @queue = "#{@cxt.config.full_namespace}:#{QUEUE}"
     end
 
-    def push_one(hook : String)
+    def push(hook : String)
       @cxt.pool.redis { |conn| conn.lpush(queue, hook) }
     end
 
-    def push_one(hook : Webhook)
-      push_one(hook.to_json)
+    def push(hook : Webhook)
+      push(hook.to_json)
     end
 
-    def push_bulk(hooks : Array(Webhook))
+    def push(hooks : Array(Webhook))
       @cxt.pool.redis_pipe do |pipe|
         hooks.each { |hook| pipe.lpush(queue, hook.to_json) }
       end
