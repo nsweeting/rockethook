@@ -13,7 +13,8 @@ module Rockethook
       retry_schedule:   { type: Array(Int32), default: [60, 300, 1000, 2000]},
       pinger:           { type: Bool, default: true },
       namespace:        { type: String, default: "webhooks" },
-      environment:      { type: String, default: "development" }
+      environment:      { type: String, default: "development" },
+      reaper_time:      { type: Int32, default: 3600 }
     )
 
     def full_namespace

@@ -10,7 +10,7 @@ module Rockethook
         @queue = ["#{cxt.config.full_namespace}:#{QUEUE}"]
       end
 
-      def pop_one
+      def pop
         array = @cxt.pool.redis do |conn|
           conn.brpop(queue, TIMEOUT).as(Array(Redis::RedisValue))
         end

@@ -18,33 +18,12 @@ module Rockethook
         pools[key] = Rockethook::Server::HTTPPool.new(uri)
       end
 
-      def delete_old!(time = Time.now.epoch)
+      def delete_old!
+        time = Time.now.epoch - @cxt.config.reaper_time
         pools.each do |pool|
-          next unless pool.last.created_at < time
+          next if pool.last.created_at > time
           pools.delete(pool.first)
         end
-      end
-    end
-
-    class ConnectionCollector
-      def initialize(@manager : Rockethook::Server::Manager)
-      end
-
-      def start
-        spawn do
-          until stop
-            connections.delete_old!
-            sleep 60
-          end
-        end
-      end
-
-      private def stop
-        @manager.stop?
-      end
-
-      private def connections
-        @manager.connections
       end
     end
 

@@ -1,6 +1,6 @@
 require "./spec_helper"
 
-describe Headsail do
+describe Rockethook do
   # TODO: Write tests
 
   it "works" do

@@ -1,8 +1,6 @@
 require "../webhook"
 require "../client"
-require "./processor"
-require "./scheduler"
-require "./tracker"
+require "./processes"
 require "./fetcher"
 require "./delayer"
 require "./poller"
@@ -11,10 +9,12 @@ require "./connections"
 
 module Rockethook
   module Server
+
     class Manager
       getter cxt : Rockethook::Context
       getter concurrency : Int32
-      getter processors : Array(Processor)
+      getter reapers : Array(Reaper)
+      getter deliverers : Array(Deliverer)
       getter schedulers : Array(Scheduler)
       getter trackers : Array(Tracker)
       getter connections : Rockethook::Server::Connections
@@ -26,9 +26,9 @@ module Rockethook
       def initialize(@cxt : Rockethook::Context)
         @concurrency  = cxt.config.concurrency
         @trackers     = [] of Rockethook::Server::Tracker
-        @processors   = [] of Rockethook::Server::Processor
+        @deliverers   = [] of Rockethook::Server::Deliverer
         @schedulers   = [] of Rockethook::Server::Scheduler
-        @collectors   = [] of Rockethook::Server::ConnectionCollector
+        @reapers      = [] of Rockethook::Server::Reaper
         @connections  = Rockethook::Server::Connections.new(cxt)
         @fetcher      = Rockethook::Server::Fetcher.new(cxt)
         @delayer      = Rockethook::Server::Delayer.new(cxt)
@@ -38,16 +38,16 @@ module Rockethook
       end
 
       def start
-        start_collectors
+        start_reapers
         start_trackers
-        start_processors
+        start_deliverers
         start_scheduler
       end
 
-      def start_collectors
-        collector = Rockethook::Server::ConnectionCollector.new(self)
-        @collectors << collector
-        collector.start
+      def start_reapers
+        reaper = Rockethook::Server::Reaper.new(self)
+        @reapers << reaper
+        reaper.start
       end
 
       def start_trackers
@@ -56,11 +56,11 @@ module Rockethook
         tracker.start
       end
 
-      def start_processors
+      def start_deliverers
         concurrency.times do
-          processor = Rockethook::Server::Processor.new(self)
-          @processors << processor
-          processor.start
+          deliverer = Rockethook::Server::Deliverer.new(self)
+          @deliverers << deliverer
+          deliverer.start
         end
       end
 

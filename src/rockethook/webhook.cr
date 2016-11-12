@@ -1,6 +1,7 @@
 require "json"
 require "secure_random"
 require "openssl/hmac"
+require "http/headers"
 
 module Rockethook
   struct Webhook
@@ -19,8 +20,16 @@ module Rockethook
       self.attempts += 1
     end
 
+    def headers
+      HTTP::Headers{
+        "X-Webhook-Context" => context,
+        "X-Webhook-Signature" => generate_hmac,
+        "X-Webhook-Event" => event
+      }
+    end
+
     def generate_hmac
-      Base64.encode(OpenSSL::HMAC.digest(:sha256, token, payload.to_s)).strip
+      Base64.encode(OpenSSL::HMAC.digest(:sha256, token, payload.to_json)).strip
     end
   end
 end
