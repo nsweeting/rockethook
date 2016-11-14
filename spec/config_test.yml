@@ -1,0 +1,14 @@
+redis_pool: 2
+redis_timeout: 3.0
+concurrency: 2
+logging: false
+max_attempts: 4
+retry_schedule:
+  - 60
+  - 3600
+  - 6400
+  - 12800
+pinger: true
+namespace: test
+environment: test
+reaper_time: 3600
