@@ -2,6 +2,12 @@
 
 Rockethook is a microservice dedicated to delivering webhooks. Backed by the Crystal Language and Redis, Rockethook can achieve unmatched speeds with little effort.
 
+Rough benchmarks on Ubuntu 16.04:
+
+Runtime | RSS | Time | Throughput
+--------|-----|------|-------------
+Crystal 0.19.2 | 15MB | 5.2 | 19,220 webhooks/sec
+
 ## Installation
 
 Prerequisites:
