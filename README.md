@@ -15,30 +15,30 @@ Prerequisites:
 * The latest version of crystal (> 0.19.0).
 
 Clone the repo:
-```
-git clone https://github.com/nsweeting/rockethook.git
-```
+~~~ sh
+$ git clone https://github.com/nsweeting/rockethook.git
+~~~
 Switch to repo-directory:
-```
-cd rockethook
-```
+~~~ sh
+$ cd rockethook
+~~~
 Build:
-```
-make install
-```
+~~~ sh
+$ make install
+~~~
 Add /user/local/bin to your $PATH for access to Rockethoook from the command-line.
-```
+~~~ sh
 $ echo 'export PATH="/usr/local/bin:$PATH"' >> ~/.bash_profile
-```
-Ubuntu Desktop note: Modify your ~/.bashrc instead of ~/.bash_profile.
+~~~
+**Ubuntu Desktop note**: Modify your ~/.bashrc instead of ~/.bash_profile.
 
-Zsh note: Modify your ~/.zshrc file instead of ~/.bash_profile.
+**Zsh note**: Modify your ~/.zshrc file instead of ~/.bash_profile.
 
 Run Rockethook with the rockethook command.
 
-```
-rockethook
-```
+~~~ sh
+$ rockethook
+~~~
 
 ## Usage
 
