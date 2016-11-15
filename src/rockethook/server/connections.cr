@@ -27,7 +27,7 @@ module Rockethook
       end
     end
 
-    class HTTPPool
+    struct HTTPPool
       getter created_at : Int64
       property! config : URI
       property! size : Int32
