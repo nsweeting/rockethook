@@ -1,6 +1,6 @@
 ![alt tag](https://github.com/nsweeting/rockethook/blob/master/rockethook-logo.png?raw=true)
 
-Rockethook is a microservice dedicated to delivering webhooks. Backed by the Crystal Language and Redis, Rockethook can achieve unmatched speeds with little effort. Rockethook compiles to a small executable that is easy to setup and deploy.
+Rockethook is a microservice dedicated to delivering webhooks. Backed by the Crystal Language and Redis, Rockethook can achieve unmatched speeds with little effort. And it all compiles to a small executable that is easy to setup and deploy.
 
 Rough benchmarks on Ubuntu 16.04:
 
