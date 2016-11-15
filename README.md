@@ -2,6 +2,16 @@
 
 Rockethook is a microservice dedicated to delivering webhooks. Backed by the Crystal Language and Redis, Rockethook can achieve unmatched speeds with little effort. And it all compiles to a small executable that is easy to setup and deploy.
 
+Some features of Rockethook include:
+* Ability to add context and event info to each webhook via headers.
+* Automatically generates HMAC headers for source verification.
+* Support for max attempts and retry schedules.
+* Fast HTTP requests with Keep-Alive headers.
+* Client support for Ruby and Crystal.
+* Support for blacklisting failed hosts.
+* Ops center provides insight into your Rockethook service.
+
+
 Rough benchmarks on Ubuntu 16.04:
 
 Runtime | RSS | Time | Throughput
