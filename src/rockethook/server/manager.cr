@@ -1,9 +1,7 @@
 require "../webhook"
 require "../client"
 require "./processes"
-require "./fetcher"
-require "./delayer"
-require "./poller"
+require "./utilities"
 require "./statistics"
 require "./connections"
 
