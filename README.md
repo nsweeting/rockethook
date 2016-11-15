@@ -18,7 +18,7 @@ Prerequisites:
 ~~~ sh
 $ git clone https://github.com/nsweeting/rockethook.git
 ~~~
-2. Switch to repo-directory:
+2. Switch to the repo directory:
 ~~~ sh
 $ cd rockethook
 ~~~
