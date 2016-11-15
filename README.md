@@ -25,6 +25,7 @@ Add /user/local/bin to your $PATH for access to Rockethoook from the command-lin
 $ echo 'export PATH="/usr/local/bin:$PATH"' >> ~/.bash_profile
 ```
 Ubuntu Desktop note: Modify your ~/.bashrc instead of ~/.bash_profile.
+
 Zsh note: Modify your ~/.zshrc file instead of ~/.bash_profile.
 
 Run Rockethook with the rockethook command.
