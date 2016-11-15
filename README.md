@@ -18,13 +18,20 @@ cd rockethook
 ```
 Build:
 ```
-make
+make install
 ```
-And create symlink of `./bin/rockethook` into the directory that is listed in your `$PATH`, e.g.:
+Add /user/local/bin to your $PATH for access to Rockethoook from the command-line.
 ```
-sudo ln -s $(realpath ./bin/rockethook) /usr/bin/rockethook
+$ echo 'export PATH="/usr/local/bin:$PATH"' >> ~/.bash_profile
 ```
-_(it's necessary only for the first time)_
+Ubuntu Desktop note: Modify your ~/.bashrc instead of ~/.bash_profile.
+Zsh note: Modify your ~/.zshrc file instead of ~/.bash_profile.
+
+Run Rockethook with the rockethook command.
+
+```
+rockethook
+```
 
 ## Usage
 

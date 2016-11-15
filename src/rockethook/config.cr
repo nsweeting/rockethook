@@ -5,9 +5,9 @@ module Rockethook
     BASE = "nothing: here"
 
     YAML.mapping(
-      redis_pool:       { type: Int32, default: 100 },
+      redis_pool:       { type: Int32, default: 25 },
       redis_timeout:    { type: Float64, default: 5.0 },
-      concurrency:      { type: Int32, default: 1 },
+      concurrency:      { type: Int32, default: 10 },
       logging:          { type: Bool, default: true },
       max_attempts:     { type: Int32, default: 5 },
       retry_schedule:   { type: Array(Int32), default: [60, 300, 1000, 2000]},

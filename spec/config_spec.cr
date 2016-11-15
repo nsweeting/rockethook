@@ -2,6 +2,11 @@ require "./spec_helper"
 require "../src/rockethook/config"
 
 describe Rockethook::Config do
+  it "has default config values" do
+    yaml = Rockethook::Config::BASE
+    config = Rockethook::Config.from_yaml(yaml)
+  end
+
   it "can set the redis pool from yaml" do
     config = load_config
     config.redis_pool.should eq 2
