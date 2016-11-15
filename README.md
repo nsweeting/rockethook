@@ -15,18 +15,25 @@ Prerequisites:
 * The latest version of crystal (> 0.19.0).
 
 1. Clone the repo:
+
    ~~~ sh
    $ git clone https://github.com/nsweeting/rockethook.git
    ~~~
+
 2. Switch to the repo directory:
+
    ~~~ sh
    $ cd rockethook
    ~~~
+
 3. Build:
+
    ~~~ sh
    $ make install
    ~~~
+
 4. Add /user/local/bin to your $PATH for access to Rockethoook from the command-line.
+
    ~~~ sh
    $ echo 'export PATH="/usr/local/bin:$PATH"' >> ~/.bash_profile
    ~~~
