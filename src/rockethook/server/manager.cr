@@ -2,14 +2,11 @@ require "../webhook"
 require "../client"
 require "./processes"
 require "./utilities"
-require "./statistics"
 require "./connections"
 
 module Rockethook
   module Server
     class Manager
-      alias Processes = Tracker | Scheduler | Reaper | Deliverer
-
       getter cxt : Rockethook::Context
       getter concurrency : Int32
       getter processes : Array(Processes)

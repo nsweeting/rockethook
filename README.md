@@ -16,7 +16,7 @@ Rough benchmarks on Ubuntu 16.04:
 
 Runtime | RSS | Time | Throughput
 --------|-----|------|-------------
-Crystal 0.19.2 | 15MB | 5.2 | 19,220 webhooks/sec
+Crystal 0.19.2 | 15MB | 5.2 | 20,800 webhooks/sec
 
 ## Installation
 

@@ -1,5 +1,7 @@
 module Rockethook
   module Server
+    alias Processes = Tracker | Scheduler | Reaper | Deliverer
+    
     module Process
       def initialize(@manager : Rockethook::Server::Manager)
       end

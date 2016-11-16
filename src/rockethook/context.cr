@@ -13,5 +13,9 @@ module Rockethook
         logger.progname = "rockethook"
       end
     end
+
+    def redis
+      @pool.redis { |conn| yield conn }
+    end
   end
 end
