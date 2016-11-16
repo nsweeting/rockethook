@@ -10,14 +10,14 @@ module Rockethook
         @queue = ["#{cxt.config.full_namespace}:#{QUEUE}"]
       end
 
-      def pop
+      def call
         array = @cxt.pool.redis do |conn|
           conn.brpop(queue, TIMEOUT).as(Array(Redis::RedisValue))
         end
         Webhook.from_json(array.last.to_s) if array.size == 2
       end
     end
-    
+
     class Delayer
       QUEUE = "retry"
 
@@ -27,7 +27,7 @@ module Rockethook
         @queue = "#{@cxt.config.full_namespace}:#{QUEUE}"
       end
 
-      def add(webhook : Rockethook::Webhook)
+      def call(webhook : Rockethook::Webhook)
         return if max_attempts?(webhook)
         delay = Time.now + delay_for(webhook.attempts).seconds
         @cxt.pool.redis { |conn| conn.zadd(queue, delay.epoch, webhook.to_json) }
@@ -56,7 +56,7 @@ module Rockethook
         @client = Rockethook::Client.new(@cxt)
       end
 
-      def requeue
+      def call
         now = Time.now.epoch
         @cxt.pool.redis do |conn|
           loop do

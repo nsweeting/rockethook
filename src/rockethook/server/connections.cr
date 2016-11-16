@@ -11,11 +11,7 @@ module Rockethook
 
       def [](uri : URI)
         key = uri.host.to_s
-        pools.has_key?(key) ? pools[key] : add_pool(key, uri)
-      end
-
-      def add_pool(key : String, uri : URI)
-        pools[key] = Rockethook::Server::HTTPPool.new(uri)
+        pools[key]? || new_pool(key, uri)
       end
 
       def delete_old!
@@ -24,6 +20,10 @@ module Rockethook
           next if pool.last.created_at > time
           pools.delete(pool.first)
         end
+      end
+
+      private def new_pool(key, uri)
+        pools[key] = Rockethook::Server::HTTPPool.new(uri)
       end
     end
 

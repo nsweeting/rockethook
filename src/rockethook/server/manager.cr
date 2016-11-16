@@ -7,65 +7,34 @@ require "./connections"
 
 module Rockethook
   module Server
-
     class Manager
+      alias Processes = Tracker | Scheduler | Reaper | Deliverer
+
       getter cxt : Rockethook::Context
       getter concurrency : Int32
-      getter reapers : Array(Reaper)
-      getter deliverers : Array(Deliverer)
-      getter schedulers : Array(Scheduler)
-      getter trackers : Array(Tracker)
-      getter connections : Rockethook::Server::Connections
-      getter fetcher : Rockethook::Server::Fetcher
-      getter delayer : Rockethook::Server::Delayer
-      getter poller : Rockethook::Server::Poller
-      getter stats : Rockethook::Server::Statistics
+      getter processes : Array(Processes)
+      getter connections : Connections
+      getter fetcher : Fetcher
+      getter delayer : Delayer
+      getter poller : Poller
+      getter stats : Statistics
 
       def initialize(@cxt : Rockethook::Context)
         @concurrency  = cxt.config.concurrency
-        @trackers     = [] of Rockethook::Server::Tracker
-        @deliverers   = [] of Rockethook::Server::Deliverer
-        @schedulers   = [] of Rockethook::Server::Scheduler
-        @reapers      = [] of Rockethook::Server::Reaper
-        @connections  = Rockethook::Server::Connections.new(cxt)
-        @fetcher      = Rockethook::Server::Fetcher.new(cxt)
-        @delayer      = Rockethook::Server::Delayer.new(cxt)
-        @poller       = Rockethook::Server::Poller.new(cxt)
-        @stats        = Rockethook::Server::Statistics.new(cxt)
-
+        @processes    = [] of Processes
+        @connections  = Connections.new(cxt)
+        @fetcher      = Fetcher.new(cxt)
+        @delayer      = Delayer.new(cxt)
+        @poller       = Poller.new(cxt)
+        @stats        = Statistics.new(cxt)
       end
 
       def start
-        start_reapers
-        start_trackers
-        start_deliverers
-        start_scheduler
-      end
-
-      def start_reapers
-        reaper = Rockethook::Server::Reaper.new(self)
-        @reapers << reaper
-        reaper.start
-      end
-
-      def start_trackers
-        tracker = Rockethook::Server::Tracker.new(self)
-        @trackers << tracker
-        tracker.start
-      end
-
-      def start_deliverers
-        concurrency.times do
-          deliverer = Rockethook::Server::Deliverer.new(self)
-          @deliverers << deliverer
-          deliverer.start
+        concurrency.times { @processes << Deliverer.new(self) }
+        [Reaper.new(self), Tracker.new(self), Scheduler.new(self)].each do |p|
+          @processes << p
         end
-      end
-
-      def start_scheduler
-        scheduler = Rockethook::Server::Scheduler.new(self)
-        @schedulers << scheduler
-        scheduler.start
+        @processes.each(&.start)
       end
 
       def stop!
