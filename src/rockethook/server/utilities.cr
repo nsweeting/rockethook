@@ -28,17 +28,13 @@ module Rockethook
       end
 
       def call(webhook : Rockethook::Webhook)
-        return if max_attempts?(webhook)
+        return if webhook.attempts > @cxt.config.max_attempts
         delay = Time.now + delay_for(webhook.attempts).seconds
         @cxt.pool.redis { |conn| conn.zadd(queue, delay.epoch, webhook.to_json) }
       end
 
       private def delay_for(count)
         @cxt.config.retry_schedule[count - 1]? || default_delay(count)
-      end
-
-      private def max_attempts?(webhook : Rockethook::Webhook)
-        webhook.attempts > @cxt.config.max_attempts
       end
 
       private def default_delay(count)
